@@ -1,7 +1,9 @@
+import { useRouter } from 'next/router';
 import React, { useState } from 'react'
 import { apiService } from '../../services/APIService';
 
 export default function Register() {
+    const router = useRouter()
 
     const [dataForm, setDataForm] = useState({
         username: '',
@@ -22,14 +24,25 @@ export default function Register() {
 
     const registerSubmit = (e) => {
         e.preventDefault()
-        console.log(dataForm)
         const {username, password, email, firstname, lastname, date_of_birth} = dataForm
         apiService.get('users').then(response => {
-            console.log(response.data)
-        })
-        apiService.post('users',{username, password, email, firstname, lastname, date_of_birth})
-        .then(response => {
-            console.log(response)
+            const users = response.data.data
+            const checkEmailDupe = users.find(user => user.email == email)
+            const checkUsernameDupe = users.find(user => user.username == username)
+
+            if (checkEmailDupe != null) {
+                return console.log('Adress already used.')
+            }
+
+            if (checkUsernameDupe != null) {
+                return console.log('Username already used.')
+            }
+
+            apiService.post('users',{username, password, email, firstname, lastname, date_of_birth})
+            .then(response => {
+                console.log(response.data.message)
+                router.push('/')
+            })
         })
     }
     
