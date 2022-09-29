@@ -1,5 +1,6 @@
 import styles from '../styles/Home.module.scss'
 
+import React, { useState } from 'react'
 import Test from '../components/Test'
 import Link from 'next/link'
 
@@ -7,15 +8,40 @@ export default function Home({ users, user1 }) {
 
     console.log('Home',users)
 
+    const [dataForm, setDataForm] = useState({
+        username: '',
+        password: '',
+    })
+
+    const handleChange = (e) => {
+        const value = e.target.value;
+        setDataForm({
+          ...dataForm,
+          [e.target.name]: value
+        });
+    }
+
+    const loginSubmit = (e) => {
+        e.preventDefault()
+    }
+
+
     return (
         <>
-      <ul>
-        {users.data.map((user,index) => (
-            <li key={index}>{user.username}</li>
-            ))}
-      </ul>
-            <Test users={users} user1={user1}/>
             <Link href="/users"><a>Users</a></Link>
+            <div className='container'>
+                <h1 className='register'>Login</h1>
+                <form className='form-login' onSubmit={loginSubmit} method="post">
+
+                <label htmlFor="username">Username:</label>
+                <input type="text" id="username" name="username" value={dataForm.value} onChange={handleChange} />
+
+                <label htmlFor="password">Password:</label>
+                <input type="password" id="password" name="password" value={dataForm.value} onChange={handleChange} />
+
+                <button type="submit">Login</button>
+                </form>
+            </div>
         </>
     )
 }

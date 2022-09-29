@@ -6,7 +6,11 @@ export default function HomeUsers({users, user1}) {
   return (
     <>
         <div>HomeUsers</div>
-        <Test users={users} user1={user1}/>
+        <ul>
+        {users.data.map((user,index) => (
+            <li key={index}>{user.username}</li>
+            ))}
+        </ul>
     </>
   )
 }
