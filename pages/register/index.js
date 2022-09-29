@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-
+import { apiService } from '../../services/APIService';
 
 export default function Register() {
 
     const [dataForm, setDataForm] = useState({
         username: '',
-        password: '',
         email: '',
+        password: '',
         firstname: '',
         lastname: '',
-        dateofbirth: ''
+        date_of_birth: ''
     })
 
     const handleChange = (e) => {
@@ -23,11 +23,14 @@ export default function Register() {
     const registerSubmit = (e) => {
         e.preventDefault()
         console.log(dataForm)
-    }
-
-    const handleRegisterButton = (e) => {
-        e.preventDefault()
-        console.log('nique')
+        const {username, password, email, firstname, lastname, date_of_birth} = dataForm
+        apiService.get('users').then(response => {
+            console.log(response.data)
+        })
+        apiService.post('users',{username, password, email, firstname, lastname, date_of_birth})
+        .then(response => {
+            console.log(response)
+        })
     }
     
   return (
@@ -52,11 +55,10 @@ export default function Register() {
                 <input type="text" id="lastname" name="lastname" value={dataForm.value} onChange={handleChange} />
 
 
-                <label htmlFor="dateofbirth">Date of birth:</label>
-                <input type="date" id="dateofbirth" name="dateofbirth" value={dataForm.value} onChange={handleChange} />
+                <label htmlFor="date_of_birth">Date of birth:</label>
+                <input type="date" id="date_of_birth" name="date_of_birth" value={dataForm.value} onChange={handleChange} />
 
-                {/* <button type="submit" onClick={handleRegisterButton}>Submit</button> */}
-                <button type="submit">Submit</button>
+                <button type="submit">Register</button>
             </form>
         </div>
     </>

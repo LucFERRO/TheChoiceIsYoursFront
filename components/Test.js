@@ -1,7 +1,8 @@
 import React from 'react'
 
-export default function Test({users}) {
-    console.log('test compo dans page Homeusers:', users)
+export default function Test({users,user1}) {
+    console.log('Test compo:', users)
+    console.log('Test compo:', user1)
   return (
     <div>Test</div>
   )
