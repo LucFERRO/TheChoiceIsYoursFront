@@ -24,11 +24,14 @@ export default function Home({ users, user1 }) {
     const loginSubmit = (e) => {
         e.preventDefault()
         const {username, password} = loginDataForm
-        apiService.login(loginDataForm).then(response => {
+        apiService.login(loginDataForm)
+        .then(response => {
             console.log(response.data)
-
-            router.push('/')
-
+            localStorage.setItem('currentUserId',response.data.userId)
+            return router.push('/profile')
+        })
+        .catch(error => {
+            console.log('Catch in index loginSubmit: ', error.response.data.message)
         })
     }
 
