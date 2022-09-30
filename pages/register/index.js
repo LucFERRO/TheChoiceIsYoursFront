@@ -5,7 +5,7 @@ import { apiService } from '../../services/APIService';
 export default function Register() {
     const router = useRouter()
 
-    const [dataForm, setDataForm] = useState({
+    const [registerDataForm, setRegisterDataForm] = useState({
         username: '',
         email: '',
         password: '',
@@ -16,17 +16,17 @@ export default function Register() {
 
     const handleChange = (e) => {
         const value = e.target.value;
-        setDataForm({
-          ...dataForm,
+        setRegisterDataForm({
+          ...registerDataForm,
           [e.target.name]: value
         });
     }
 
     const registerSubmit = (e) => {
         e.preventDefault()
-        const {username, password, email, firstname, lastname, date_of_birth} = dataForm
+        const {username, password, email, firstname, lastname, date_of_birth} = registerDataForm
         apiService.get('users').then(response => {
-            const users = response.data.data
+            const users = response.data
             const checkEmailDupe = users.find(user => user.email == email)
             const checkUsernameDupe = users.find(user => user.username == username)
 
@@ -53,23 +53,23 @@ export default function Register() {
             <form className='form-register' onSubmit={registerSubmit} method="post">
 
                 <label htmlFor="username">Username:</label>
-                <input type="text" id="username" name="username" value={dataForm.value} onChange={handleChange} />
+                <input type="text" id="username" name="username" value={registerDataForm.value} onChange={handleChange} />
 
                 <label htmlFor="password">Password:</label>
-                <input type="password" id="password" name="password" value={dataForm.value} onChange={handleChange} />
+                <input type="password" id="password" name="password" value={registerDataForm.value} onChange={handleChange} />
 
                 <label htmlFor="email">Email:</label>
-                <input type="text" id="email" name="email" value={dataForm.value} onChange={handleChange} />
+                <input type="text" id="email" name="email" value={registerDataForm.value} onChange={handleChange} />
 
                 <label htmlFor="firstname">Firstname:</label>
-                <input type="text" id="firstname" name="firstname" value={dataForm.value} onChange={handleChange} />
+                <input type="text" id="firstname" name="firstname" value={registerDataForm.value} onChange={handleChange} />
 
                 <label htmlFor="lastname">Lastname:</label>
-                <input type="text" id="lastname" name="lastname" value={dataForm.value} onChange={handleChange} />
+                <input type="text" id="lastname" name="lastname" value={registerDataForm.value} onChange={handleChange} />
 
 
                 <label htmlFor="date_of_birth">Date of birth:</label>
-                <input type="date" id="date_of_birth" name="date_of_birth" value={dataForm.value} onChange={handleChange} />
+                <input type="date" id="date_of_birth" name="date_of_birth" value={registerDataForm.value} onChange={handleChange} />
 
                 <button type="submit">Register</button>
             </form>

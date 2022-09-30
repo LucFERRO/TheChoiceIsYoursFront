@@ -3,7 +3,6 @@ const url = 'http://localhost:5000';
 import axios from 'axios'
 
 const apiService = {
-
     login(logs) {
         return axios
             .post(`${url}/api/auth/login`, logs)
