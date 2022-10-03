@@ -1,5 +1,6 @@
 import axios from 'axios'
 import '../styles/globals.scss'
+import jwt_decode from 'jwt-decode'
 
 function MyApp({ Component, pageProps }) {
     
@@ -9,6 +10,10 @@ function MyApp({ Component, pageProps }) {
             let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjQ4MDAyNDAsImV4cCI6MTY2NDgwMDI1NX0.RMUDUKijf_076rDRFQELQp2TjSWDFpJb_fTuWK6jMXI'
 
             request.headers.Authorization = `Bearer ${token}`
+
+            let decodedToken = jwt_decode(token)
+            let currentTime = new Date().getTime() / 1000
+            if (decodedToken.exp < currentTime) console.log('Expired')
 
             return request;
         },
@@ -27,13 +32,19 @@ function MyApp({ Component, pageProps }) {
         error => {
             // console.log(error)
             if (error.response.status === 400 && !error.response.data.userFound) {
-                console.log('Interceptor in _app: ',error.response.data.message)
+                console.log('Interceptor in _app: ', error.response.data.message)
                 // const access_token = await refreshAccessToken();            
                 // axios.defaults.headers.common['Authorization'] = 'Bearer ' + access_token;
                 // return error
             }
             if (error.response.status === 401 && !error.response.data.successfullLogin) {
-                console.log('Interceptor in _app: ',error.response.data.message)
+                console.log('Interceptor in _app: ', error.response.data.message)
+                // const access_token = await refreshAccessToken();            
+                // axios.defaults.headers.common['Authorization'] = 'Bearer ' + access_token;
+                // return error
+            }
+            if (error.response.status === 403 && error.response.data.tokenIsExpired) {
+                console.log('Interceptor in _app: ', error.response.data.message)
                 // const access_token = await refreshAccessToken();            
                 // axios.defaults.headers.common['Authorization'] = 'Bearer ' + access_token;
                 // return error
