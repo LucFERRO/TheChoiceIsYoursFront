@@ -11,7 +11,6 @@ export default function middleware (req) {
     let url = req.url
 
     if (!verify && url.includes('/profile')) {
-        console.log(verify)
         return NextResponse.redirect('http:/localhost:3000/')
     }
 }
