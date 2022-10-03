@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar';
 import { useRouter } from 'next/router';
 import { setCookie, getCookie, getCookies, deleteCookie } from "cookies-next"
+import { apiService } from '../../services/APIService';
 
 export default function Profile({users, loggedUser}) {
     const router = useRouter()
@@ -24,20 +25,7 @@ export default function Profile({users, loggedUser}) {
         router.push('/')
     }
 
-    let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjQ3OTU3ODMsImV4cCI6MTY2NDc5NTc5OH0.cul5u8qfqjyFGW37a0-vsz437mptW0Qn56p_Xi6xs3I'
-
-    const resTest = fetch('http://localhost:5000/api/users/test/1'
-    ,    
-        {headers: {
-            "Access-Control-Allow-Origin" : "*",
-            "Content-type": "Application/json",
-            "Authorization": `Bearer ${token}`
-            }   
-        }
-        )
-    .then((response) => {response.json(), console.log(response)})
-    // .then((data) => console.log(data));
-
+    apiService.test(1)
 
   return (
     <>  

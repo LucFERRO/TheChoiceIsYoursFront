@@ -4,21 +4,11 @@ import '../styles/globals.scss'
 function MyApp({ Component, pageProps }) {
     
     axios.interceptors.request.use(
-        request => {
+        async request => {
             // console.log(request)
+            let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjQ4MDAyNDAsImV4cCI6MTY2NDgwMDI1NX0.RMUDUKijf_076rDRFQELQp2TjSWDFpJb_fTuWK6jMXI'
 
-
-            let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjQ3OTU3ODMsImV4cCI6MTY2NDc5NTc5OH0.cul5u8qfqjyFGW37a0-vsz437mptW0Qn56p_Xi6xs3I'
-
-            // request.headers = { 
-            //     'Access-Control-Allow-Origin': "*",
-            //     'Content-type': "Application/json",
-            //     Authorization: `Bearer ${token}`
-            // }
-
-            // request.headers['Authorization'] = `Bearer ${token}`
-
-            request.headers.Authorization = token
+            request.headers.Authorization = `Bearer ${token}`
 
             return request;
         },
