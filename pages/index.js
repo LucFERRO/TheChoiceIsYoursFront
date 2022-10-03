@@ -2,8 +2,9 @@ import styles from '../styles/Home.module.scss'
 import { useRouter } from 'next/router';
 import React, { useState } from 'react'
 import Test from '../components/Test'
-import Link from 'next/link'
+import Navbar from '../components/Navbar';
 import { apiService } from '../services/APIService';
+import { setCookie, getCookie, getCookies, deleteCookie } from "cookies-next"
 
 export default function Home({ users, user1 }) {
     const router = useRouter()
@@ -27,41 +28,18 @@ export default function Home({ users, user1 }) {
         apiService.login(loginDataForm)
         .then(response => {
             console.log(response.data)
-            localStorage.setItem('currentUserId',response.data.userId)
+            // localStorage.setItem('currentUserId',response.data.userId)
+            setCookie('loggedUserId', response.data.userId)
             return router.push('/profile')
         })
         .catch(error => {
-            console.log('Catch in index loginSubmit: ', error.response.data.message)
+            console.log('Catch in index loginSubmit: ', error.response.message)
         })
     }
 
-    // AXIOS INTERCEPTOR SALTY ED FRONT
-    // const axiosInterceptors = (config) => {
-    //     axios.interceptors.request.use((config) => {
-    //         if (localStorage.getItem("token")) {
-    //         config.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
-    //             "token"
-    //         )}`;
-    //         }
-    //         return config;
-    //     })
-    
-    //     axios.interceptors.response.use(
-    //     function (response) {
-    //         return response;
-    //     },
-    //     function (error) {
-    //         if (error.response.status === 401 && error.response.data.message !== 'Invalid credentials.') {
-    //         localStorage.removeItem("token");
-    //         router.push({ name: "Login" });
-    //         }
-    //     })
-    // }
-
-
     return (
         <>
-            <Link href="/users"><a>Users</a></Link>
+            <Navbar />
             <div className='container'>
                 <h1 className='register'>Login</h1>
                 <form className='form-login' onSubmit={loginSubmit} method="post">
@@ -78,7 +56,6 @@ export default function Home({ users, user1 }) {
         </>
     )
 }
-  
 
 export async function getStaticProps() {
     const res = await fetch('http://localhost:5000/api/users')
@@ -94,11 +71,3 @@ export async function getStaticProps() {
         },
     }
 }
-
-
-
-    // <div className={styles.container}>
-    //     Template propre Next+Axios
-    //     <Test />
-    //     {/* <Blog /> */}
-    // </div>

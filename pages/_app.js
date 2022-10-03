@@ -46,7 +46,6 @@ function MyApp({ Component, pageProps }) {
             return Promise.reject(error);
         });
     
-
     return <Component {...pageProps} />
 }
 

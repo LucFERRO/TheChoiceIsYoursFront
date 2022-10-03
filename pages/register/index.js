@@ -1,5 +1,7 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react'
+import Navbar from '../../components/Navbar';
 import { apiService } from '../../services/APIService';
 
 export default function Register() {
@@ -48,6 +50,7 @@ export default function Register() {
     
   return (
     <>
+        <Navbar />
         <div className='container'>
             <h1 className='register'>Register</h1>
             <form className='form-register' onSubmit={registerSubmit} method="post">
