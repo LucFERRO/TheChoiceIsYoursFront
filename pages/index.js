@@ -31,7 +31,7 @@ export default function Home({ users, user1 }) {
             let tokenData = {
                 refreshToken: response.data.refreshToken
             }
-            apiService.post('tokens',tokenData)
+            apiService.post('tokens',tokenData).then(response => setCookie('loginSuccessfull', true))
             return router.push('/profile')
         })
         .catch(error => {

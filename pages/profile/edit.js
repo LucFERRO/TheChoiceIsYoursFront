@@ -1,14 +1,17 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import Form from '../../components/Form';
 import Navbar from '../../components/Navbar';
+import { setCookie, getCookie, getCookies, deleteCookie, hasCookie } from "cookies-next"
 import { apiService } from '../../services/APIService';
 
-export default function Register() {
+export default function Register({ users }) {
     const router = useRouter()
 
-    const [registerDataForm, setRegisterDataForm] = useState({
+    const [currentUser, setCurrentUser] = useState()
+
+    const [updateProfileDataForm, setUpdateProfileForm] = useState({
         username: '',
         email: '',
         password: '',
@@ -17,17 +20,23 @@ export default function Register() {
         date_of_birth: ''
     })
 
+    useEffect(() => { 
+        const user = users.find( user => user.id == getCookie('loggedUserId') )
+        setCurrentUser(user)
+        console.log(currentUser)
+    }, []);
+
     const handleChange = (e) => {
         const value = e.target.value;
-        setRegisterDataForm({
-          ...registerDataForm,
+        setUpdateProfileForm({
+          ...updateProfileDataForm,
           [e.target.name]: value
         });
     }
 
     const registerSubmit = (e) => {
         e.preventDefault()
-        const {username, password, email, firstname, lastname, date_of_birth} = registerDataForm
+        const {username, password, email, firstname, lastname, date_of_birth} = updateProfileDataForm
         apiService.get('users').then(response => {
             const users = response.data
             const checkEmailDupe = users.find(user => user.email == email)
@@ -52,7 +61,18 @@ export default function Register() {
   return (
     <>
         <Navbar />
-        <Form formName={'Register'} handleChange={handleChange} submit={registerSubmit} dataForm={registerDataForm} />
+        <Form formName={'Edit profile'} handleChange={handleChange} submit={registerSubmit} dataForm={updateProfileDataForm} />
     </>
   )
+}
+
+export async function getServerSideProps() {
+    const res = await fetch('http://localhost:5000/api/users')
+    const users = await res.json()
+
+    return {
+        props: {
+            users,
+        },
+    }
 }
