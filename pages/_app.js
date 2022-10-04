@@ -24,12 +24,10 @@ function MyApp({ Component, pageProps }) {
                 if (!isExpired) {
                     return request      //If not expired, proceed.
                 } else {
-                    const tokenARemplacerParLocalStorageRefreshToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiWnVsIiwiaWF0IjoxNjY0Nzg2ODMyfQ.oXdMRVtXuigBJhQics70gaoMohXmK4bYIGZG-yUrstA'
-                    
+
                     const refreshToken = getCookie('refreshToken')
 
-                    const newToken = await apiService.refreshAccessToken({"token": tokenARemplacerParLocalStorageRefreshToken})
-                    console.log('New token: ', newToken.data.accessToken)
+                    const newToken = await apiService.refreshAccessToken({"token": refreshToken})
                     setCookie('accessToken', newToken.data.accessToken)
                     request.headers.Authorization = `Bearer ${getCookie('accessToken')}`
                     return request
