@@ -25,9 +25,9 @@ export default function Profile({users, loggedUser}) {
         router.push('/')
     }
 
-    apiService.test(1)
-        // .then(response => console.log(response))
-        // .catch(error => console.log(error))
+    // apiService.test(1)
+    //     .then(response => console.log(response))
+    //     .catch(error => console.log(error))
 
   return (
     <>  
