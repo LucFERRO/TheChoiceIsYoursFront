@@ -21,14 +21,17 @@ function MyApp({ Component, pageProps }) {
                 let currentTime = new Date().getTime() / 1000
                 let isExpired = decodedToken.exp < currentTime
 
-                if (!isExpired) return request      //If not expired, proceed.
-
-                const tokenARemplacerParLocalStorageRefreshToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiWnVsIiwiaWF0IjoxNjY0Nzg2ODMyfQ.oXdMRVtXuigBJhQics70gaoMohXmK4bYIGZG-yUrstA'
-
-                const newToken = await apiService.refreshAccessToken({"token": tokenARemplacerParLocalStorageRefreshToken})
-                console.log('New token: ',newToken.data.accessToken)
-                request.headers.Authorization = `Bearer ${newToken.data.accessToken}`
-                return request
+                if (!isExpired) {
+                    return request      //If not expired, proceed.
+                } else {
+                    const tokenARemplacerParLocalStorageRefreshToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiWnVsIiwiaWF0IjoxNjY0Nzg2ODMyfQ.oXdMRVtXuigBJhQics70gaoMohXmK4bYIGZG-yUrstA'
+                    
+                    const newToken = await apiService.refreshAccessToken({"token": tokenARemplacerParLocalStorageRefreshToken})
+                    console.log('New token: ', newToken.data.accessToken)
+                    localStorage.setItem('accessToken', newToken.data.accessToken)
+                    request.headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`
+                    return request
+                }
             }
 
 
