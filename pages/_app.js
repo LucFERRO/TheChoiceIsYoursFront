@@ -1,26 +1,34 @@
 import axios from 'axios'
 import '../styles/globals.scss'
 import jwt_decode from 'jwt-decode'
+import { setCookie, getCookie, getCookies, deleteCookie, hasCookie } from "cookies-next"
 
 function MyApp({ Component, pageProps }) {
     
     axios.interceptors.request.use(
         async request => {
-            console.log('Request url: ',request.url)
-            let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjQ4NzA2MTYsImV4cCI6MTY2NDg3MDYzMX0.2ccptFANNKQhNi0Lhj6XXpsLMEY4MX-o7mtni6dy3bo"
+
+            // console.log('Request url: ',request.url)
+
+            let token = localStorage.getItem('accessToken')
 
             request.headers.Authorization = `Bearer ${token}`
 
-            // console.log('Doit être test: ',localStorage.getItem('token'))
-
             if (request.url.includes('http://localhost:5000/api/users/test/')) {
-                console.log('Hello test')
     
                 let decodedToken = jwt_decode(token)
                 let currentTime = new Date().getTime() / 1000
-                // if (decodedToken.exp < currentTime) console.log('Expired')
-                return request
+                let isExpired = decodedToken.exp < currentTime
+
+                console.log('isExpired: ', isExpired)
+
+                // if (isExpired) console.log('Expired')
+                if (!isExpired) return request
             }
+
+
+
+            // console.log('Doit être test: ',localStorage.getItem('token'))
 
             return request;
         },
@@ -32,9 +40,10 @@ function MyApp({ Component, pageProps }) {
     axios.interceptors.response.use((response) => {
         // console.log(response)
         if (response.status == 200 && response.data.successfullLogin) {
-            console.log('Access token: ', response.data.accessToken)
             localStorage.setItem('accessToken', response.data.accessToken)
+            // setCookie('accessTokenCookie', response.data.accessToken)
             localStorage.setItem('refreshToken', response.data.refreshToken)
+            localStorage.setItem('loggedUserId', response.data.userId)
         }
         return response
       }, 

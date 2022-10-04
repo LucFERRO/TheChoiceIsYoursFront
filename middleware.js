@@ -1,12 +1,15 @@
 import { NextResponse } from "next/server";
-import { setCookie, getCookie, getCookies } from "cookies-next"
+import { setCookie, getCookie, getCookies, hasCookie } from "cookies-next"
 
 
 export default function middleware (req) {
-    // let verify = req.cookies.get('loggedIn')
-    let verify = true
 
-    // let verify = getCookie('loggedUserId')
+
+    // let verify = localStorage.getItem('accessToken') ? localStorage.getItem('accessToken') : null
+    // let verify = getCookie('accessTokenCookie') ? getCookie('accessTokenCookie') : null
+    // let verify = hasCookie('accessTokenCookie')
+
+    let verify = true
 
     let url = req.url
 

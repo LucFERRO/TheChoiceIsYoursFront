@@ -1,33 +1,36 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar';
 import { useRouter } from 'next/router';
-import { setCookie, getCookie, getCookies, deleteCookie } from "cookies-next"
+import { setCookie, getCookie, getCookies, deleteCookie, hasCookie } from "cookies-next"
 import { apiService } from '../../services/APIService';
 
 export default function Profile({users, loggedUser}) {
     const router = useRouter()
 
-    const [loggedInUserId, setLoggedInUserId] = useState()
+    const [loggedUserId, setLoggedUserId] = useState()
     const [currentUser, setCurrentUser] = useState()
     useEffect(() => { 
         // setLoggedInUserId(localStorage.getItem("currentUserId")) 
-        setLoggedInUserId(getCookie('loggedUserId')) 
+        setLoggedUserId(localStorage.getItem('loggedUserId')) 
     }, []);
     useEffect(() => { 
-        const user = users.find( user => user.id == loggedInUserId )
+        const user = users.find( user => user.id == loggedUserId )
         setCurrentUser(user)
-    }, [loggedInUserId]);
+    }, [loggedUserId]);
 
     // const user = users.find((user : userTypes) => user.username == req.body.username)
 
     const logout = (e) => {
         deleteCookie('loggedUserId')
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('loggedUserId');
         router.push('/')
     }
 
-    // apiService.test(1)
-    //     .then(response => console.log(response))
-    //     .catch(error => console.log(error))
+    apiService.test(1)
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
 
   return (
     <>  
