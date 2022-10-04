@@ -6,7 +6,10 @@ const apiService = {
     test(userId) {
         return axios.get(`${url}/api/users/test/${userId}`)
     },
-
+    refreshAccessToken(data) {
+        return axios
+            .post(`${url}/api/auth/token`, data)
+    },
     login(logs) {
         return axios
             .post(`${url}/api/auth/login`, logs)

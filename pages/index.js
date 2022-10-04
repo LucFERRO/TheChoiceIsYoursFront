@@ -26,6 +26,7 @@ export default function Home({ users, user1 }) {
     const loginSubmit = (e) => {
         e.preventDefault()
         const {username, password} = loginDataForm
+        console.log(loginDataForm)
         apiService.login(loginDataForm)
         .then(response => {
 

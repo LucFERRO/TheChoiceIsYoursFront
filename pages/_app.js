@@ -2,6 +2,7 @@ import axios from 'axios'
 import '../styles/globals.scss'
 import jwt_decode from 'jwt-decode'
 import { setCookie, getCookie, getCookies, deleteCookie, hasCookie } from "cookies-next"
+import { apiService } from '../services/APIService'
 
 function MyApp({ Component, pageProps }) {
     
@@ -20,10 +21,14 @@ function MyApp({ Component, pageProps }) {
                 let currentTime = new Date().getTime() / 1000
                 let isExpired = decodedToken.exp < currentTime
 
-                console.log('isExpired: ', isExpired)
+                if (!isExpired) return request      //If not expired, proceed.
 
-                // if (isExpired) console.log('Expired')
-                if (!isExpired) return request
+                const tokenARemplacerParLocalStorageRefreshToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiWnVsIiwiaWF0IjoxNjY0Nzg2ODMyfQ.oXdMRVtXuigBJhQics70gaoMohXmK4bYIGZG-yUrstA'
+
+                const newToken = await apiService.refreshAccessToken({"token": tokenARemplacerParLocalStorageRefreshToken})
+                console.log('New token: ',newToken.data.accessToken)
+                request.headers.Authorization = `Bearer ${newToken.data.accessToken}`
+                return request
             }
 
 

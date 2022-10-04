@@ -29,8 +29,8 @@ export default function Profile({users, loggedUser}) {
     }
 
     apiService.test(1)
-        .then(response => console.log(response))
-        .catch(error => console.log(error))
+        // .then(response => console.log(response))
+        // .catch(error => console.log(error))
 
   return (
     <>  
