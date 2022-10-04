@@ -26,6 +26,8 @@ function MyApp({ Component, pageProps }) {
                 } else {
                     const tokenARemplacerParLocalStorageRefreshToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiWnVsIiwiaWF0IjoxNjY0Nzg2ODMyfQ.oXdMRVtXuigBJhQics70gaoMohXmK4bYIGZG-yUrstA'
                     
+                    const refreshToken = getCookie('refreshToken')
+
                     const newToken = await apiService.refreshAccessToken({"token": tokenARemplacerParLocalStorageRefreshToken})
                     console.log('New token: ', newToken.data.accessToken)
                     setCookie('accessToken', newToken.data.accessToken)

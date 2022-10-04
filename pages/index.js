@@ -26,10 +26,12 @@ export default function Home({ users, user1 }) {
     const loginSubmit = (e) => {
         e.preventDefault()
         const {username, password} = loginDataForm
-        console.log(loginDataForm)
         apiService.login(loginDataForm)
         .then(response => {
-
+            let tokenData = {
+                refreshToken: response.data.refreshToken
+            }
+            apiService.post('tokens',tokenData)
             return router.push('/profile')
         })
         .catch(error => {
