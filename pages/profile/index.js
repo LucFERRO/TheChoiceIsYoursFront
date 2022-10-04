@@ -10,8 +10,7 @@ export default function Profile({users, loggedUser}) {
     const [loggedUserId, setLoggedUserId] = useState()
     const [currentUser, setCurrentUser] = useState()
     useEffect(() => { 
-        // setLoggedInUserId(localStorage.getItem("currentUserId")) 
-        setLoggedUserId(localStorage.getItem('loggedUserId')) 
+        setLoggedUserId(getCookie('loggedUserId')) 
     }, []);
     useEffect(() => { 
         const user = users.find( user => user.id == loggedUserId )
@@ -21,10 +20,9 @@ export default function Profile({users, loggedUser}) {
     // const user = users.find((user : userTypes) => user.username == req.body.username)
 
     const logout = (e) => {
+        deleteCookie('accessToken')
+        deleteCookie('refreshToken')
         deleteCookie('loggedUserId')
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
-        localStorage.removeItem('loggedUserId');
         router.push('/')
     }
 
@@ -64,14 +62,9 @@ export async function getServerSideProps() {
     const res = await fetch('http://localhost:5000/api/users')
     const users = await res.json()
 
-    // const currentUserId = localStorage.getItem("currentUserId")
-    // const resUser = await fetch(`http://localhost:5000/api/users/${currentUserId}`)
-    // const loggedUser = await resUser.json()
-
     return {
         props: {
             users,
-            // loggedUser
         },
     }
 }

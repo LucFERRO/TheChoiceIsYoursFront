@@ -4,12 +4,7 @@ import { setCookie, getCookie, getCookies, hasCookie } from "cookies-next"
 
 export default function middleware (req) {
 
-
-    // let verify = localStorage.getItem('accessToken') ? localStorage.getItem('accessToken') : null
-    // let verify = getCookie('accessTokenCookie') ? getCookie('accessTokenCookie') : null
-    // let verify = hasCookie('accessTokenCookie')
-
-    let verify = true
+    let verify = req.cookies.get('accessToken')
 
     let url = req.url
 

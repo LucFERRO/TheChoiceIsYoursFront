@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }) {
 
             // console.log('Request url: ',request.url)
 
-            let token = localStorage.getItem('accessToken')
+            let token = getCookie('accessToken')
 
             request.headers.Authorization = `Bearer ${token}`
 
@@ -28,15 +28,11 @@ function MyApp({ Component, pageProps }) {
                     
                     const newToken = await apiService.refreshAccessToken({"token": tokenARemplacerParLocalStorageRefreshToken})
                     console.log('New token: ', newToken.data.accessToken)
-                    localStorage.setItem('accessToken', newToken.data.accessToken)
-                    request.headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`
+                    setCookie('accessToken', newToken.data.accessToken)
+                    request.headers.Authorization = `Bearer ${getCookie('accessToken')}`
                     return request
                 }
             }
-
-
-
-            // console.log('Doit être test: ',localStorage.getItem('token'))
 
             return request;
         },
@@ -48,10 +44,9 @@ function MyApp({ Component, pageProps }) {
     axios.interceptors.response.use((response) => {
         // console.log(response)
         if (response.status == 200 && response.data.successfullLogin) {
-            localStorage.setItem('accessToken', response.data.accessToken)
-            // setCookie('accessTokenCookie', response.data.accessToken)
-            localStorage.setItem('refreshToken', response.data.refreshToken)
-            localStorage.setItem('loggedUserId', response.data.userId)
+            setCookie('accessToken', response.data.accessToken)
+            setCookie('refreshToken', response.data.refreshToken)
+            setCookie('loggedUserId', response.data.userId)
         }
         return response
       }, 
