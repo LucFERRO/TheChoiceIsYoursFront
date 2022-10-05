@@ -38,8 +38,6 @@ export default function Register({ users }) {
         })
     }, [currentUser]);
 
-    console.log(updateProfileDataForm)
-
     const handleChange = (e) => {
         const value = e.target.value;
         setUpdateProfileForm({
@@ -50,7 +48,7 @@ export default function Register({ users }) {
 
     const editProfileSubmit = (e) => {
         e.preventDefault()
-        const {username, password, email, firstname, lastname, date_of_birth} = updateProfileDataForm
+        const {username, password, email, biography, firstname, lastname, date_of_birth} = updateProfileDataForm
         apiService.get('users').then(response => {
             const users = response.data
             const checkEmailDupe = users.find(user => user.email == email)
@@ -66,10 +64,13 @@ export default function Register({ users }) {
                 return console.log('Username already used.')
             }
 
-            apiService.put(`users/${getCookie('loggedUserId')}`,{username, password, email, firstname, lastname, date_of_birth})
+            apiService.put(`users/${getCookie('loggedUserId')}`,{username, password, email, biography, firstname, lastname, date_of_birth})
             .then(response => {
                 console.log(response.data.message)
                 router.push('/profile')
+            })
+            .catch(error => {
+                console.log(error)
             })
         })
     }

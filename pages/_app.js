@@ -55,6 +55,10 @@ function MyApp({ Component, pageProps }) {
             if (error.response.status === 400 && !error.response.data.userFound) {
                 console.log('Interceptor in _app: ', error.response.data.message)
             }
+            if (error.response.status === 400 && error.response.data.passwordRequired) {
+                // console.log('Interceptor in _app: ', error.response.data.message)
+                return Promise.reject({error: error, errorHandling: {passwordNotGiven: true}});
+            }
             if (error.response.status === 401 && !error.response.data.successfullLogin) {
                 console.log('Interceptor in _app: ', error.response.data.message)
             }
