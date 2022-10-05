@@ -54,24 +54,12 @@ function MyApp({ Component, pageProps }) {
             // console.log(error)
             if (error.response.status === 400 && !error.response.data.userFound) {
                 console.log('Interceptor in _app: ', error.response.data.message)
-
-                // const access_token = await refreshAccessToken();            
-                // axios.defaults.headers.common['Authorization'] = 'Bearer ' + access_token;
-                // return error
             }
             if (error.response.status === 401 && !error.response.data.successfullLogin) {
                 console.log('Interceptor in _app: ', error.response.data.message)
-
-                // const access_token = await refreshAccessToken();            
-                // axios.defaults.headers.common['Authorization'] = 'Bearer ' + access_token;
-                // return error
             }
             if (error.response.status === 403 && error.response.data.tokenIsExpired) {
                 console.log('Interceptor in _app: ', error.response.data.message)
-
-                // const access_token = await refreshAccessToken();            
-                // axios.defaults.headers.common['Authorization'] = 'Bearer ' + access_token;
-                // return error
             }
             return Promise.reject(error);
         });

@@ -12,6 +12,7 @@ export default function Register() {
         username: '',
         email: '',
         password: '',
+        passwordConfirm: '',
         firstname: '',
         lastname: '',
         date_of_birth: ''
@@ -33,13 +34,13 @@ export default function Register() {
             const checkEmailDupe = users.find(user => user.email == email)
             const checkUsernameDupe = users.find(user => user.username == username)
 
-            if (checkEmailDupe != null) {
-                return console.log('Adress already used.')
-            }
+            if (!password) return console.log('Password is required.')
 
-            if (checkUsernameDupe != null) {
-                return console.log('Username already used.')
-            }
+            if (checkEmailDupe != null) return console.log('Adress already used.')
+
+
+            if (checkUsernameDupe != null) return console.log('Username already used.')
+
 
             apiService.post('users',{username, password, email, firstname, lastname, date_of_birth})
             .then(response => {
@@ -52,7 +53,7 @@ export default function Register() {
   return (
     <>
         <Navbar />
-        <Form formName={'Register'} handleChange={handleChange} submit={registerSubmit} dataForm={registerDataForm} />
+        <Form formName={'Register'} formButton={'Register'} handleChange={handleChange} submit={registerSubmit} dataForm={registerDataForm} />
     </>
   )
 }
