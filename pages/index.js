@@ -1,13 +1,12 @@
 import styles from '../styles/Home.module.scss'
 import { useRouter } from 'next/router';
 import React, { useState } from 'react'
-import Test from '../components/Test'
 import Head from 'next/head';
 import Navbar from '../components/Navbar';
 import { apiService } from '../services/APIService';
 import { setCookie, getCookie, getCookies, deleteCookie } from "cookies-next"
 
-export default function Home({ users, user1 }) {
+export default function Home({ users }) {
     const router = useRouter()
 
     const [loginDataForm, setLoginDataForm] = useState({
@@ -68,13 +67,9 @@ export async function getStaticProps() {
     const res = await fetch('http://localhost:5000/api/users')
     const users = await res.json()
 
-    const test2 = await fetch('http://localhost:5000/api/users/1')
-    const user1 = await test2.json()
-
     return {
         props: {
             users,
-            user1,
         },
     }
 }

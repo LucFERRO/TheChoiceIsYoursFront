@@ -1,12 +1,8 @@
 import React from 'react'
 import Navbar from '../../components/Navbar'
-import Test from '../../components/Test'
 import { setCookie, getCookie, getCookies, deleteCookie } from "cookies-next"
 
 export default function HomeUsers({users}) {
-    // console.log('HomeUsers:',users)
-
-    console.log('all cookies',getCookies())
 
   return (
     <>  
