@@ -17,6 +17,7 @@ export default function Register({ users }) {
         password: '',
         firstname: '',
         lastname: '',
+        biography: '',
         date_of_birth: ''
     })
 
@@ -30,13 +31,14 @@ export default function Register({ users }) {
             email: currentUser ? currentUser.email : '',
             password: '',
             passwordConfirm: '',
+            biography: currentUser ? currentUser.biography : '',
             firstname: currentUser ? currentUser.firstname : '',
             lastname: currentUser ? currentUser.lastname : '',
             date_of_birth: currentUser ? currentUser.date_of_birth : ''
         })
     }, [currentUser]);
 
-    console.log(currentUser)
+    console.log(updateProfileDataForm)
 
     const handleChange = (e) => {
         const value = e.target.value;

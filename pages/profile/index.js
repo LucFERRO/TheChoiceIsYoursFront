@@ -20,6 +20,7 @@ export default function Profile({ users }) {
         deleteCookie('accessToken')
         deleteCookie('refreshToken')
         deleteCookie('loggedUserId')
+        deleteCookie('loginSuccessfull')
         router.push('/')
     }
 
@@ -48,6 +49,7 @@ export default function Profile({ users }) {
                         <li>Lastname: {currentUser.lastname}</li>
                         <li>Email: {currentUser.email}</li>
                         <li>Date of birth: {currentUser.date_of_birth}</li>
+                        <li><p>Biography:</p> {currentUser.biography ? currentUser.biography : 'No biography added yet.'}</li>
                     </ul> 
                     <button onClick={edit}>Edit</button> 
                 </>

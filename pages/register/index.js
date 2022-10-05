@@ -13,6 +13,7 @@ export default function Register() {
         email: '',
         password: '',
         passwordConfirm: '',
+        biography: '',
         firstname: '',
         lastname: '',
         date_of_birth: ''

@@ -4,6 +4,8 @@ import { setCookie, getCookie, getCookies, deleteCookie } from "cookies-next"
 
 export default function HomeUsers({users}) {
 
+    console.log(users)
+
   return (
     <>  
         <Navbar />

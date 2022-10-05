@@ -30,6 +30,14 @@ export default function Form({formName, formButton, isEdit, handleChange, submit
             <label htmlFor="lastname">Lastname:</label>
             <input type="text" id="lastname" name="lastname" value={dataForm.lastname} onChange={handleChange} />
 
+            {isEdit ? 
+                <>
+                    <label htmlFor="passwordConfirm">Biography:</label>
+                    {/* <input className='editBiography' type="text" id="biography" name="biography" value={dataForm.biography} onChange={handleChange} /> */}
+                    <textarea className='editBiography' type="text" id="biography" name="biography"  value={dataForm.biography} onChange={handleChange}></textarea>
+                </>
+            : 
+            ''}
 
             <label htmlFor="date_of_birth">Date of birth:</label>
             <input type="date" id="date_of_birth" name="date_of_birth" value={dataForm.date_of_birth} onChange={handleChange} />
