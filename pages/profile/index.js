@@ -28,9 +28,9 @@ export default function Profile({ users }) {
         router.push('/profile/edit')
     }
 
-    // apiService.test(1)
-        // .then(response => console.log(response))
-        // .catch(error => console.log(error))
+    apiService.test(1)
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
 
   return (
     <>  

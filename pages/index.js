@@ -48,7 +48,7 @@ export default function Home({ users }) {
             <Navbar />
             <div className='container'>
                 <h1 className='register'>Login</h1>
-                <form className='form-login' onSubmit={loginSubmit} method="post">
+                <form className='formLogin' onSubmit={loginSubmit} method="post">
 
                 <label htmlFor="username">Username:</label>
                 <input type="text" id="username" name="username" value={loginDataForm.value} onChange={handleChange} />

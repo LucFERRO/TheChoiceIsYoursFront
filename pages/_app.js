@@ -28,6 +28,10 @@ function MyApp({ Component, pageProps }) {
                     const refreshToken = getCookie('refreshToken')
 
                     const newToken = await apiService.refreshAccessToken({"token": refreshToken})
+
+                    // Voir pour générer nouveau refresh aussi.
+                    // Tracer anciens refresh et invalider.
+
                     setCookie('accessToken', newToken.data.accessToken)
                     request.headers.Authorization = `Bearer ${getCookie('accessToken')}`
                     return request

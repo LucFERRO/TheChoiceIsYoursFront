@@ -4,7 +4,7 @@ export default function Form({formName, formButton, isEdit, handleChange, submit
   return (
     <div className='container'>
         <h1 className='register'>{formName}</h1>
-        <form className='form-register' onSubmit={submit} method="post">
+        <form className='formRegister' onSubmit={submit} method="post">
 
             <label htmlFor="username">Username:</label>
             <input type="text" id="username" name="username" value={dataForm.username} onChange={handleChange} />
