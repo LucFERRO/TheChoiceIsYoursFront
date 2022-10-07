@@ -1,0 +1,117 @@
+.styledForm {
+    width: 100%;
+    text-align: left;
+    flex-direction: column;
+
+    > * {
+    margin: 10px 0;
+    box-sizing: border-box;
+    }
+
+    p {
+        font-style: normal;
+        font-weight: 600;
+        line-height: 16px;
+        color: #251F47;
+    }
+    
+    p:first-child {
+        font-family: "Libre Baskerville";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 32px;
+        color: #000;
+    }
+
+    button + p {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 10px;
+        line-height: 14px;
+        text-align: center;
+        color: #807E8C;
+    }
+    
+    #pseudo-input-container {
+        margin: 40px 0 10px 0;
+    }
+
+    .inputContainer {
+        height: 50px;
+        border-radius: 8px;
+        box-sizing: border-box;
+        position: relative;
+        label {
+            z-index: -1;
+            font-size: 12px;
+            position: absolute;
+            top: 38%;
+            left: 14px;
+            transition: 0.2s;
+        }
+    }
+
+    .inputContainer[data-error] input {
+        border-color: #c92432;
+        color: #c92432;
+    }
+
+    .inputContainer[data-error]::after {
+        content: attr(data-error);
+        position: absolute;
+        color: #DF8282;
+        font-weight: 600;
+        top: 10px;
+        right: 10px;
+        font-size: 10px;
+    }
+    .inputContainer[data-error-empty] input {
+        border-color: #c92432;
+        color: #c92432;
+    }
+
+    .inputContainer[data-error-empty]::after {
+        content: attr(data-error-empty);
+        position: absolute;
+        color: #DF8282;
+        font-weight: 600;
+        top: 30%;
+        right: 10px;
+        font-size: 16px;
+    }
+
+    input {
+        width: 100%;
+        height: 100%;
+        padding: 30px 0 14px 14px;
+        border-radius: 8px;
+        border: 1px solid #807E8C;
+        box-sizing: border-box;
+        background-color: transparent;
+    }
+
+    input:focus {
+        outline: none;
+        border: 1px solid #146C6A;
+        color: #251F47;
+    }
+
+    input:focus + label {
+        top: 10px;
+        font-size: 10px;
+        color: #807E8C;
+    }
+
+    .registerButton {
+        width: 100%;
+        height: 45px;
+        border-radius: 8px;
+        background: #146C6A;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 16px;
+        color: #FFFFFF;
+        border: none;
+        filter: drop-shadow(0px 6px 8px rgba(20, 108, 106, 0.35));
+    }
+}
