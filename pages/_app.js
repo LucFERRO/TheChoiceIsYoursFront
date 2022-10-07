@@ -31,6 +31,7 @@ function MyApp({ Component, pageProps }) {
 
                     // Voir pour générer nouveau refresh aussi.
                     // Tracer anciens refresh et invalider.
+                    // Systeme de log avec Pino ?
 
                     setCookie('accessToken', newToken.data.accessToken)
                     request.headers.Authorization = `Bearer ${getCookie('accessToken')}`
