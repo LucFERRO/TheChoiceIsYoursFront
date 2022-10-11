@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react'
 import Form from '../../components/Form';
 import Navbar from '../../components/Navbar';
+import StyledForm from '../../components/StyledForm';
 import { apiService } from '../../services/APIService';
 
 export default function Register() {
@@ -39,9 +40,7 @@ export default function Register() {
 
             if (checkEmailDupe != null) return console.log('Adress already used.')
 
-
             if (checkUsernameDupe != null) return console.log('Username already used.')
-
 
             apiService.post('users',{username, password, email, firstname, lastname, date_of_birth})
             .then(response => {
@@ -54,7 +53,7 @@ export default function Register() {
   return (
     <>
         <Navbar />
-        <Form formName={'Register'} formButton={'Register'} handleChange={handleChange} submit={registerSubmit} dataForm={registerDataForm} />
+        <StyledForm formName={'Register'} formButton={'Register'} handleChange={handleChange} submit={registerSubmit} dataForm={registerDataForm} />
     </>
   )
 }
