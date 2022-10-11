@@ -26,16 +26,15 @@ export default function StyledForm() {
     // }
 
     const handleLabel = (e) => {
+        let label = e.target.parentElement.childNodes[1]
         if (e.target.value) {
-            console.log('its not empty')
-            // inputLabel.style.color = '#807E8C'
-            // inputLabel.style.top = '10px'
-            // inputLabel.style.fontSize = '10px'
+            label.style.color = '#807E8C'
+            label.style.top = '10px'
+            label.style.fontSize = '10px'
         } else {
-            console.log('its empty')
-            // inputLabel.attributeStyleMap.delete('color')
-            // inputLabel.attributeStyleMap.delete('top')
-            // inputLabel.attributeStyleMap.delete('font-size')
+            label.attributeStyleMap.delete('color')
+            label.attributeStyleMap.delete('top')
+            label.attributeStyleMap.delete('font-size')
         }
     }
 
@@ -57,29 +56,29 @@ export default function StyledForm() {
     <>  
         <div className='container'>
             <div className={inputStyle.styledForm}>
-                <div class={inputStyle.inputContainer} data-error-empty='Requis'>
-                    <input id="usernameInput" className={inputStyle.registerInput} onClick={removeErrorAttribute} onBlur={handleLabel} name="username" type="text" placeholder=""/>
-                    <label for="usernameInput" id="usernameInputLabel">Username</label>
+                <div className={inputStyle.inputContainer} data-error-empty='Requis'>
+                    <input id="usernameInput" className={inputStyle.registerInput} onBlur={handleLabel} onChange={removeErrorAttribute} name="username" type="text" placeholder=""/>
+                    <label htmlFor="usernameInput" id="usernameInputLabel">Username</label>
                 </div>
-                <div class={inputStyle.inputContainer}>
-                    <input id="passwordInput" className={inputStyle.registerInput} name="password" type="password" placeholder=""/>
-                    <label for="passwordInput" id="passwordInputLabel">Password</label>
+                <div className={inputStyle.inputContainer}>
+                    <input id="passwordInput" className={inputStyle.registerInput} onBlur={handleLabel} onChange={removeErrorAttribute} name="password" type="password" placeholder=""/>
+                    <label htmlFor="passwordInput" id="passwordInputLabel">Password</label>
                 </div>
-                <div class={inputStyle.inputContainer}>
-                    <input id="emailInput" className={inputStyle.registerInput} name="email" type="text" placeholder=""/>
-                    <label for="emailInput" id="emailInputLabel">Email</label>
+                <div className={inputStyle.inputContainer}>
+                    <input id="emailInput" className={inputStyle.registerInput} onBlur={handleLabel} onChange={removeErrorAttribute} name="email" type="text" placeholder=""/>
+                    <label htmlFor="emailInput" id="emailInputLabel">Email</label>
                 </div>
-                <div class={inputStyle.inputContainer}>
-                    <input id="firstnameInput" className={inputStyle.registerInput} name="firstname" type="text" placeholder=""/>
-                    <label for="firstnameInput" id="firstnameInputLabel">Firstname</label>
+                <div className={inputStyle.inputContainer}>
+                    <input id="firstnameInput" className={inputStyle.registerInput} onBlur={handleLabel} onChange={removeErrorAttribute} name="firstname" type="text" placeholder=""/>
+                    <label htmlFor="firstnameInput" id="firstnameInputLabel">Firstname</label>
                 </div>
-                <div class={inputStyle.inputContainer}>
-                    <input id="lastnameInput" className={inputStyle.registerInput} name="lastname" type="text" placeholder=""/>
-                    <label for="lastnameInput" id="lastnameInputLabel">Lastname</label>
+                <div className={inputStyle.inputContainer}>
+                    <input id="lastnameInput" className={inputStyle.registerInput} onBlur={handleLabel} onChange={removeErrorAttribute} name="lastname" type="text" placeholder=""/>
+                    <label htmlFor="lastnameInput" id="lastnameInputLabel">Lastname</label>
                 </div>
-                <div class={inputStyle.inputContainer}>
-                    <input id="dateOfBirthInput" className={inputStyle.registerInput} name="dateOfBirth" type="date" placeholder=""/>
-                    <label for="dateOfBirthInput" id="dateOfBirthInputLabel">Date of birth</label>
+                <div className={inputStyle.inputContainer}>
+                    <input id="dateOfBirthInput" className={inputStyle.registerInput} onBlur={handleLabel} onChange={removeErrorAttribute} name="dateOfBirth" type="date" placeholder=""/>
+                    <label htmlFor="dateOfBirthInput" id="dateOfBirthInputLabel" className={inputStyle.dateLabel}>Date of birth</label>
                 </div>
                 <button type="submit" className={inputStyle.registerButton} 
                 // @click.prevent="register(pseudo, email, password, passwordConfirmation)"
