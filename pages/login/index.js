@@ -27,10 +27,11 @@ export default function Login({ users }) {
         const {username, password} = loginDataForm
         apiService.login(loginDataForm)
         .then(response => {
-            let tokenData = {
-                refreshToken: response.data.refreshToken
-            }
-            apiService.post('tokens',tokenData).then(response => setCookie('loginSuccessfull', true))
+            // let tokenData = {
+            //     refreshToken: response.data.refreshToken
+            // }
+            // console.log('Token in login', response.data)
+            // apiService.post('tokens',tokenData).then(response => setCookie('loginSuccessfull', true))
             return router.push('/profile')
         })
         .catch(error => {

@@ -45,8 +45,8 @@ export default function StyledForm({formName, formButton, isRegister, isEdit, ha
             <h1 className='register'>{formName}</h1>
             <form className='formRegister' onSubmit={submit} method="post">
                 <div className={inputStyle.styledForm}>
-                    <div className={inputStyle.inputContainer}>
-                        <input id="usernameInput" className={inputStyle.registerInput} onBlur={handleLabel} onChange={handleInputChange} name="username" value={dataForm.username} type="text" placeholder=""/>
+                    <div className={inputStyle.inputContainer} data-error='REQUIS'>
+                        <input id="usernameInput" className={inputStyle.registerInput}  onBlur={handleLabel} onChange={handleInputChange} name="username" value={dataForm.username} type="text" placeholder=""/>
                         <label htmlFor="usernameInput" id="usernameInputLabel">Username</label>
                     </div>
                     <div className={inputStyle.inputContainer}>
