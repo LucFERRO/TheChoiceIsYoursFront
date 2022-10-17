@@ -48,19 +48,7 @@ export default function Login({ users }) {
             </Head>
             <Navbar />
             <StyledForm formName={'Login'} formButton={'Login'} isRegister={false} isEdit={false} handleChange={handleChange} submit={loginSubmit} dataForm={loginDataForm}/>
-            <div className='container'>
-                <h1 className='register'>Login</h1>
-                <form className='formLogin' onSubmit={loginSubmit} method="post">
-
-                <label htmlFor="username">Username:</label>
-                <input type="text" id="username" name="username" value={loginDataForm.value} onChange={handleChange} />
-
-                <label htmlFor="password">Password:</label>
-                <input type="password" id="password" name="password" value={loginDataForm.value} onChange={handleChange} />
-
-                <button type="submit">Login</button>
-                </form>
-            </div>
+            
         </>
     )
 }

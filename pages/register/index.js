@@ -53,7 +53,7 @@ export default function Register() {
   return (
     <>
         <Navbar />
-        <StyledForm formName={'Register'} formButton={'Register'} handleChange={handleChange} submit={registerSubmit} dataForm={registerDataForm} />
+        <StyledForm formName={'Register'} formButton={'Register'} isRegister={true} isEdit={false} handleChange={handleChange} submit={registerSubmit} dataForm={registerDataForm} />
     </>
   )
 }
